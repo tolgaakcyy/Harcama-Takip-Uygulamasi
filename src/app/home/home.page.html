@@ -1,0 +1,86 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Harcama Takip Uygulaması</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+
+
+  <ion-card class="toplam-card">
+    <ion-card-content class="ion-text-center">
+      <h2>Toplam Harcama</h2>
+      <h1 class="toplam-tutar">{{ toplamTutar | currency:'TRY':'symbol-narrow':'1.2-2' }}</h1>
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-card class="ekleme-kart">
+    <ion-card-header>
+      <ion-card-title>Yeni Harcama Ekle</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item lines="full">
+        <ion-input label="Harcama Adı" labelPlacement="floating" [(ngModel)]="harcamaAdi"
+          placeholder="Örn: Market alışverişi"></ion-input>
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-input type="number" label="Tutar (₺)" labelPlacement="floating" [(ngModel)]="harcamaTutari"
+          placeholder="Örn: 150"></ion-input>
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-select label="Kategori" labelPlacement="floating" [(ngModel)]="secilenKategori" interface="action-sheet">
+          <ion-select-option *ngFor="let kat of kategoriler" [value]="kat.ad">{{ kat.ad }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-button expand="block" shape="round" class="ion-margin-top ekle-btn" (click)="harcamaEkle()">
+        Harcama Ekle
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <div style="display: flex; justify-content: space-between; align-items: center; padding-right: 16px;"
+    *ngIf="harcamalar.length > 0">
+    <h3 class="ion-padding-start baslik" style="margin: 0;">Geçmiş Harcamalar</h3>
+    <small style="color: var(--ion-color-medium); font-size: 0.8rem; font-style: italic;">Silmek için üzerine
+      tıklayın</small>
+  </div>
+
+
+  <ion-list *ngIf="harcamalar.length > 0" class="saydam-liste">
+    <ion-item-sliding #slider *ngFor="let harcama of harcamalar" class="harcama-ogesi">
+      <ion-item lines="none" detail="false" button (click)="slider.open('end')">
+        <ion-label>
+          <h2 class="harcama-adi"><b>{{ harcama.adi }}</b></h2>
+          <p class="harcama-tarih">{{ harcama.tarih }}</p>
+        </ion-label>
+
+        <div slot="end" class="sag-taraf">
+          <ion-badge color="dark">{{ harcama.kategori }}</ion-badge>
+          <ion-text color="danger" class="harcama-fiyat">
+            <b>{{ harcama.tutari | currency:'TRY':'symbol-narrow':'1.2-2' }}</b>
+          </ion-text>
+        </div>
+      </ion-item>
+
+
+      <ion-item-options side="end">
+        <ion-item-option color="danger" expandable (click)="harcamaSil(harcama)">
+          <ion-icon slot="start" name="trash"></ion-icon>
+          Sil
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+
+  <div class="bos-durum" *ngIf="harcamalar.length === 0">
+    <ion-icon name="wallet-outline"></ion-icon>
+    <p>Henüz harcama eklemediniz.</p>
+    <small>Eklediğiniz harcamalar burada listelenecektir.</small>
+  </div>
+
+</ion-content>
