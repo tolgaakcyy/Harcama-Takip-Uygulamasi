@@ -129,17 +129,7 @@ Eğer Ionic CLI yüklü değilse şu komutla kurulabilir:
 
 ```bash
 npm install -g @ionic/cli
-```
 
-## Teslim Notu
-
-Ödev dokümanında belirtilen teslim şartına göre `src/app/home/home.page.ts` dosyasının en üstüne şu yorum satırı eklenmelidir:
-
-```ts
-// TBP4001-Ionic-Harcama-Projesi-2026
-```
-
-Teslim etmeden önce bu satırın dosyanın en üstünde bulunduğundan emin olunmalıdır.
 
 ## Kısa Açıklama
 
