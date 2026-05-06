@@ -122,7 +122,7 @@ npm install
 Daha sonra Ionic projesi şu komutla çalıştırılabilir:
 
 ```bash
-ionic serve
+ionic serve 
 ```
 
 Eğer Ionic CLI yüklü değilse şu komutla kurulabilir:
